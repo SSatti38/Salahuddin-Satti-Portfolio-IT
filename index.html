@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salah Ud Din Satti | Infrastructure Security Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0f172a',
+                        cardBg: '#1e293b',
+                        accentCyan: '#06b6d4',
+                        accentBlue: '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        #matrixCanvas {
+            opacity: 0.12;
+        }
+        /* Smooth typing text blink animation */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-slate-200 font-sans antialiased selection:bg-cyan-500 selection:text-white">
+
+    <header class="fixed top-0 left-0 w-full bg-darkBg/80 backdrop-blur-md z-50 border-b border-slate-800">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-sm sm:text-base font-extrabold bg-gradient-to-r from-accentCyan to-accentBlue bg-clip-text text-transparent tracking-wider uppercase">
+                Salah Ud Din Satti
+            </a>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
+                <a href="#about" class="hover:text-accentCyan transition-colors duration-300">About</a>
+                <a href="#skills" class="hover:text-accentCyan transition-colors duration-300">Core Competencies</a>
+                <a href="#experience" class="hover:text-accentCyan transition-colors duration-300">Experience</a>
+                <a href="#projects" class="hover:text-accentCyan transition-colors duration-300">Projects</a>
+                <a href="#certifications" class="hover:text-accentCyan transition-colors duration-300">Certifications</a>
+                <a href="#education" class="hover:text-accentCyan transition-colors duration-300">Education</a>
+            </nav>
+            <a href="mailto:salahuddin.satti1798@gmail.com" class="px-4 py-2 border border-accentCyan/50 rounded-lg text-sm text-accentCyan hover:bg-accentCyan hover:text-darkBg font-semibold transition-all duration-300 shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:shadow-[0_0_25px_rgba(6,182,212,0.4)]">
+                Contact Me
+            </a>
+        </div>
+    </header>
+
+    <section id="about" class="relative min-h-screen flex items-center pt-24 pb-12 px-6 overflow-hidden">
+        <canvas id="matrixCanvas" class="absolute top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+
+        <div class="relative max-w-4xl mx-auto text-center md:text-left md:flex md:items-center md:space-x-12 z-10">
+            <div class="flex-1 space-y-6">
+                <div class="inline-block px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-xs font-semibold tracking-wider text-accentCyan uppercase">
+                    Ready for European Relocation / HQP Track
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white">
+                    Salah Ud Din Satti
+                </h1>
+                
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-400 min-h-[40px]">
+                    <div id="typewriter" class="text-accentCyan tracking-wide typing-cursor inline"></div>
+                </h2>
+
+                <p class="text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl">
+                    Computer Science graduate with 4 years of hands-on experience managing, securing, and optimizing enterprise-grade IP surveillance networks and critical control center infrastructure in Dubai. Seamlessly bridging the gap between physical infrastructure environments and digital network defense.
+                </p>
+                
+                <div class="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-slate-400">
+                    <div><i class="fa-solid fa-location-dot text-accentCyan mr-2"></i>Dubai, UAE</div>
+                    <div><i class="fa-solid fa-phone text-accentCyan mr-2"></i>+971 551027348</div>
+                    <div><i class="fa-solid fa-envelope text-accentCyan mr-2"></i>salahuddin.satti1798@gmail.com</div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
+                    <a href="https://www.linkedin.com/in/salahuddin-satti-308321147" target="_blank" class="px-6 py-3 bg-gradient-to-r from-accentCyan to-accentBlue text-darkBg font-bold rounded-lg hover:scale-[1.03] transition-transform duration-300 flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20">
+                        <i class="fa-brands fa-linkedin text-lg"></i> Connect on LinkedIn
+                    </a>
+                    <a href="#experience" class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-lg hover:scale-[1.03] transition-transform duration-300 border border-slate-700 text-center">
+                        View Experience
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-20 bg-slate-900/50 border-y border-slate-800 px-6">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-2 text-center md:text-left">Core Competencies & Stack</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-accentCyan to-accentBlue mb-12 mx-auto md:mx-0"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <div class="p-6 bg-cardBg rounded-xl border border-slate-800 hover:border-accentCyan/40 hover:scale-[1.02] transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-cyan-500/10 flex items-center justify-center mb-4 text-accentCyan group-hover:bg-accentCyan group-hover:text-darkBg transition-all duration-300">
+                        <i class="fa-solid fa-shield-halved text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Infrastructure Security</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">IP Camera Networking, NVR/VMS Systems, Network Access Control (NAC), and secure video data encryption architecture.</p>
+                </div>
+                <div class="p-6 bg-cardBg rounded-xl border border-slate-800 hover:border-accentCyan/40 hover:scale-[1.02] transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-cyan-500/10 flex items-center justify-center mb-4 text-accentCyan group-hover:bg-accentCyan group-hover:text-darkBg transition-all duration-300">
+                        <i class="fa-solid fa-network-wired text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Networking Fundamentals</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Solid handling of TCP/IP suite, localized routing and switching logic, DNS architectures, port configurations, and firewalls.</p>
+                </div>
+                <div class="p-6 bg-cardBg rounded-xl border border-slate-800 hover:border-accentCyan/40 hover:scale-[1.02] transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-cyan-500/10 flex items-center justify-center mb-4 text-accentCyan group-hover:bg-accentCyan group-hover:text-darkBg transition-all duration-300">
+                        <i class="fa-solid fa-terminal text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Cybersecurity & Defenses</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Real-time alert parsing, log analysis, threat surface mitigation, and defensive validation inside SOC frameworks.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-6 bg-cardBg rounded-xl border border-slate-800">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-code text-accentCyan"></i> Technical Skills
+                    </h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between border-b border-slate-800 pb-2">
+                            <span class="text-slate-300 font-medium">Python</span>
+                            <span class="text-slate-500 italic">Basics of Python Programming</span>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-800 pb-2">
+                            <span class="text-slate-300 font-medium">JavaScript</span>
+                            <span class="text-slate-500 italic">Basics of JavaScript</span>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-800 pb-2">
+                            <span class="text-slate-300 font-medium">HTML</span>
+                            <span class="text-slate-500 italic">Basics of HTML</span>
+                        </div>
+                        <div class="flex justify-between pb-1">
+                            <span class="text-slate-300 font-medium">Swift</span>
+                            <span class="text-slate-500 italic">Basics of Swift</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 bg-cardBg rounded-xl border border-slate-800">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-language text-accentCyan"></i> Spoken Languages
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-slate-300 font-medium">English</span>
+                                <span class="text-accentCyan text-xs">Professional Working Proficiency</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-gradient-to-r from-accentCyan to-accentBlue h-full w-[85%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-slate-300 font-medium">Urdu / Punjabi</span>
+                                <span class="text-accentCyan text-xs">Native or Bilingual Proficiency</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-gradient-to-r from-accentCyan to-accentBlue h-full w-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="experience" class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-2">Professional Experience</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-accentCyan to-accentBlue mb-12"></div>
+
+            <div class="space-y-12 relative before:absolute before:top-0 before:left-4 md:before:left-6 before:h-full before:w-0.5 before:bg-slate-800">
+                <div class="relative pl-12 md:pl-16 group">
+                    <div class="absolute top-1 left-2 md:left-4 w-4 h-4 rounded-full bg-darkBg border-2 border-accentCyan group-hover:bg-accentCyan transition-colors duration-300 z-10"></div>
+                    <div class="p-6 bg-cardBg rounded-xl border border-slate-800 group-hover:border-slate-700 transition-colors duration-300">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-4">
+                            <div>
+                                <h3 class="text-lg font-bold text-white group-hover:text-accentCyan transition-colors duration-300">SOC Surveillance & Infrastructure Analyst</h3>
+                                <div class="text-sm text-slate-400">Confidential Corporate Site — Dubai, UAE</div>
+                            </div>
+                            <div class="px-3 py-1 bg-slate-900 rounded-full text-xs text-slate-400 font-mono border border-slate-800">OCTOBER 2023 – PRESENT</div>
+                        </div>
+                        <ul class="space-y-2 text-sm text-slate-400 list-disc list-inside">
+                            <li class="hover:text-slate-300 transition-colors">Architected high-availability monitoring workflows for enterprise IP surveillance systems.</li>
+                            <li class="hover:text-slate-300 transition-colors">Analyzed network diagnostic logs, system packet drops, and anomalies to prevent perimeter breaches.</li>
+                            <li class="hover:text-slate-300 transition-colors">Configured operational metrics to minimize localized bandwidth strain over distribution paths.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="relative pl-12 md:pl-16 group">
+                    <div class="absolute top-1 left-2 md:left-4 w-4 h-4 rounded-full bg-darkBg border-2 border-accentBlue group-hover:bg-accentBlue transition-colors duration-300 z-10"></div>
+                    <div class="p-6 bg-cardBg rounded-xl border border-slate-800 group-hover:border-slate-700 transition-colors duration-300">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-4">
+                            <div>
+                                <h3 class="text-lg font-bold text-white group-hover:text-accentBlue transition-colors duration-300">Infrastructure Security Specialist & Team Lead</h3>
+                                <div class="text-sm text-slate-400">Transguard Group — Dubai, UAE</div>
+                            </div>
+                            <div class="px-3 py-1 bg-slate-900 rounded-full text-xs text-slate-400 font-mono border border-slate-800">AUGUST 2022 – OCTOBER 2023</div>
+                        </div>
+                        <ul class="space-y-2 text-sm text-slate-400 list-disc list-inside">
+                            <li class="hover:text-slate-300 transition-colors">Supervised access parameters and localized matrix controls across high-value client installations.</li>
+                            <li class="hover:text-slate-300 transition-colors">Executed technical risk assessments, profiling hardware nodes to safeguard physical networks.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 bg-slate-900/50 border-y border-slate-800 px-6">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-2 text-center md:text-left">Technical Projects</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-accentCyan to-accentBlue mb-12 mx-auto md:mx-0"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-6 bg-cardBg rounded-xl border border-slate-800 hover:border-accentCyan/40 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center text-accentCyan group-hover:bg-accentCyan group-hover:text-darkBg transition-all duration-300">
+                                <i class="fa-solid fa-mobile-screen-button text-lg"></i>
+                            </div>
+                            <span class="text-[10px] font-semibold tracking-wider bg-cyan-500/10 text-accentCyan border border-cyan-500/20 px-2 py-0.5 rounded-full uppercase">Final Year Project</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2 group-hover:text-accentCyan transition-colors">Kids Colouring Application</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-4">
+                            Developed an interactive mobile application optimized exclusively for the iOS platform using native layouts, child-safe interaction patterns, and fluid state rendering.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="text-xs font-mono text-slate-500 bg-darkBg px-2 py-1 rounded border border-slate-800">iOS</span>
+                        <span class="text-xs font-mono text-slate-500 bg-darkBg px-2 py-1 rounded border border-slate-800">Swift (Basics)</span>
+                    </div>
+                </div>
+
+                <div class="p-6 bg-cardBg rounded-xl border border-slate-800 hover:border-accentCyan/40 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center text-accentCyan group-hover:bg-accentCyan group-hover:text-darkBg transition-all duration-300">
+                                <i class="fa-solid fa-robot text-lg"></i>
+                            </div>
+                            <span class="text-[10px] font-semibold tracking-wider bg-blue-500/10 text-accentBlue border border-blue-500/20 px-2 py-0.5 rounded-full uppercase">Independent</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2 group-hover:text-accentCyan transition-colors">Cybersecurity AI Scanner</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-4">
+                            Engineered an automated website vulnerabilities and threats scanner using machine learning to parse configuration scripts, audit network layers, and map exploit risk rules.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="text-xs font-mono text-slate-500 bg-darkBg px-2 py-1 rounded border border-slate-800">AI / ML</span>
+                        <span class="text-xs font-mono text-slate-500 bg-darkBg px-2 py-1 rounded border border-slate-800">Python (Basics)</span>
+                    </div>
+                </div>
+
+                <div class="p-6 bg-cardBg rounded-xl border border-slate-800 hover:border-accentCyan/40 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center text-accentCyan group-hover:bg-accentCyan group-hover:text-darkBg transition-all duration-300">
+                                <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                            </div>
+                            <span class="text-[10px] font-semibold tracking-wider bg-blue-500/10 text-accentBlue border border-blue-500/20 px-2 py-0.5 rounded-full uppercase">Independent</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2 group-hover:text-accentCyan transition-colors">AI-Driven Web Design</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-4">
+                            Designed and deployed high-performance web spaces through automated code layouts, modern styling structures, and clean, modular user interface flows.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="text-xs font-mono text-slate-500 bg-darkBg px-2 py-1 rounded border border-slate-800">AI Frameworks</span>
+                        <span class="text-xs font-mono text-slate-500 bg-darkBg px-2 py-1 rounded border border-slate-800">HTML / CSS</span>
+                        <span class="text-xs font-mono text-slate-500 bg-darkBg px-2 py-1 rounded border border-slate-800">JS (Basics)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications" class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-2">Professional Certifications & Licenses</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-accentCyan to-accentBlue mb-12"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-6 bg-cardBg rounded-xl border border-slate-800 hover:border-slate-700 transition-colors">
+                    <div class="text-accentCyan mb-3"><i class="fa-solid fa-id-card text-2xl"></i></div>
+                    <h3 class="text-base font-bold text-white">SIRA CCTV Operator License & Training</h3>
+                    <div class="text-xs text-slate-400 mt-1">Security Industry Regulatory Agency — Dubai, UAE</div>
+                </div>
+
+                <div class="p-6 bg-cardBg rounded-xl border border-slate-800 hover:border-slate-700 transition-colors">
+                    <div class="text-accentCyan mb-3"><i class="fa-solid fa-fire-extinguisher text-2xl"></i></div>
+                    <h3 class="text-base font-bold text-white">Fire and Safety Compliance Training</h3>
+                    <div class="text-xs text-slate-400 mt-1">Corporate Crisis Management Frameworks — Dubai, UAE</div>
+                </div>
+
+                <div class="p-6 bg-cardBg rounded-xl border border-slate-800 hover:border-slate-700 transition-colors md:col-span-2">
+                    <div class="text-accentCyan mb-2"><i class="fa-solid fa-shield-halved text-2xl"></i></div>
+                    <h3 class="text-base font-bold text-white">The Complete Cyber Security Course: Hackers Exposed!</h3>
+                    <div class="text-xs text-slate-400 mt-1">Instructor: Nathan House (CEO of StationX) | Udemy Verification</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="py-20 bg-slate-900/50 border-t border-slate-800 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-2">Education & Academic Credentials</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-accentCyan to-accentBlue mb-12"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-6 bg-cardBg rounded-xl border border-slate-800 hover:border-slate-700 transition-colors">
+                    <div class="text-accentCyan mb-2"><i class="fa-solid fa-graduation-cap text-2xl"></i></div>
+                    <h3 class="text-lg font-bold text-white">B.S. in Computer Science (BSCS)</h3>
+                    <div class="text-sm text-slate-400 mt-1">Pir Meher Ali Shah Arid Agricultural University</div>
+                    <div class="text-xs text-slate-500 mt-2 font-mono">FEBRUARY 2017 – FEBRUARY 2021</div>
+                    <div class="mt-4 inline-flex items-center text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+                        <i class="fa-solid fa-circle-check mr-1.5"></i> Attested: HEC, PK MOFA & UAE MOFA
+                    </div>
+                </div>
+
+                <div class="p-6 bg-cardBg rounded-xl border border-slate-800 hover:border-slate-700 transition-colors">
+                    <div class="text-accentCyan mb-2"><i class="fa-solid fa-user-shield text-2xl"></i></div>
+                    <h3 class="text-lg font-bold text-white">Post-Graduate Certificate: Cybersecurity</h3>
+                    <div class="text-sm text-slate-400 mt-1">Air University, Islamabad, Pakistan</div>
+                    <div class="text-xs text-slate-500 mt-2 font-mono">AUGUST 2021 – JANUARY 2022</div>
+                    <div class="text-xs text-slate-400 mt-3 italic">SOC Environments, Threat Engineering & Vulnerability Assessment</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-darkBg border-t border-slate-800 py-8 text-center text-xs text-slate-600">
+        <div>&copy; 2026 Salah Ud Din Satti. All rights reserved.</div>
+    </footer>
+
+    <script>
+        const structuralData = [
+            "SOC Surveillance Analyst",
+            "Infrastructure Security Specialist",
+            "B.S. Computer Science Graduate",
+            "Cybersecurity Certificate Specialist"
+        ];
+
+        let arrayIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const targetElement = document.getElementById("typewriter");
+
+        function handleTypewriterEffect() {
+            const currentString = structuralData[arrayIndex];
+            
+            if (isDeleting) {
+                targetElement.textContent = currentString.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                targetElement.textContent = currentString.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typingSpeed = isDeleting ? 30 : 75;
+
+            if (!isDeleting && charIndex === currentString.length) {
+                typingSpeed = 2000; 
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                arrayIndex = (arrayIndex + 1) % structuralData.length;
+                typingSpeed = 400; 
+            }
+
+            setTimeout(handleTypewriterEffect, typingSpeed);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            handleTypewriterEffect();
+        });
+
+        // Matrix Background Canvas
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            const parent = canvas.parentElement;
+            canvas.width = parent.offsetWidth;
+            canvas.height = parent.offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const matrixChars = "010101010101010110101X01SOCNVRIPDNS";
+        const alphabet = matrixChars.split("");
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const rainDrops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(15, 23, 42, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#06b6d4'; 
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet[Math.floor(Math.random() * alphabet.length)];
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.98) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 33);
+    </script>
+</body>
+</html>
