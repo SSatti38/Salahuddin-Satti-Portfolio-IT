@@ -24,6 +24,52 @@
         #matrixCanvas {
             opacity: 0.12;
         }
+        :root {
+            color-scheme: dark;
+            --surface: #101827;
+            --surface-raised: rgba(21, 32, 51, 0.88);
+            --line: rgba(148, 163, 184, 0.16);
+            --cyan-glow: rgba(34, 211, 238, 0.12);
+        }
+        html {
+            scroll-padding-top: 5.5rem;
+            scrollbar-color: #334155 #0b1220;
+        }
+        body {
+            background:
+                radial-gradient(ellipse at 76% 8%, rgba(37, 99, 235, 0.13), transparent 34rem),
+                radial-gradient(ellipse at 8% 34%, rgba(124, 58, 237, 0.08), transparent 30rem),
+                #0b1220;
+        }
+        header {
+            background-color: rgba(11, 18, 32, 0.88) !important;
+            border-color: var(--line) !important;
+            box-shadow: 0 12px 36px rgba(2, 6, 23, 0.22);
+        }
+        [class~="bg-cardBg"] {
+            background: linear-gradient(145deg, var(--surface-raised), rgba(15, 23, 42, 0.9));
+            border-color: var(--line) !important;
+            box-shadow: 0 14px 36px rgba(2, 6, 23, 0.12);
+        }
+        section[id] {
+            scroll-margin-top: 5.5rem;
+        }
+        a, [class~="group"] {
+            -webkit-tap-highlight-color: transparent;
+        }
+        a:focus-visible {
+            outline: 2px solid #67e8f9;
+            outline-offset: 4px;
+            border-radius: 0.35rem;
+        }
+        a:not([href^="#"]):hover,
+        [class~="group"]:hover {
+            filter: drop-shadow(0 0 14px var(--cyan-glow));
+        }
+        footer {
+            color: #94a3b8 !important;
+            border-color: var(--line) !important;
+        }
         /* Smooth typing text blink animation */
         .typing-cursor::after {
             content: '|';
@@ -32,6 +78,15 @@
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto !important; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
@@ -69,7 +124,7 @@
                 </h1>
                 
                 <h2 class="text-xl sm:text-2xl font-bold text-slate-400 min-h-[40px]">
-                    <div id="typewriter" class="text-accentCyan tracking-wide typing-cursor inline"></div>
+                    <div id="typewriter" class="text-accentCyan tracking-wide typing-cursor inline">SOC Surveillance Analyst</div>
                 </h2>
 
                 <p class="text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl">
@@ -385,8 +440,9 @@
             setTimeout(handleTypewriterEffect, typingSpeed);
         }
 
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
         document.addEventListener("DOMContentLoaded", () => {
-            handleTypewriterEffect();
+            if (!reducedMotion.matches) handleTypewriterEffect();
         });
 
         // Matrix Background Canvas
@@ -423,7 +479,7 @@
                 rainDrops[i]++;
             }
         }
-        setInterval(drawMatrix, 33);
+        if (!reducedMotion.matches) setInterval(drawMatrix, 33);
     </script>
 </body>
 </html>
