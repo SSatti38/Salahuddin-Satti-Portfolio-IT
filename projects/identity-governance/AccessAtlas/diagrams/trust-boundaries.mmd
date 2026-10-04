@@ -1,0 +1,29 @@
+flowchart TB
+  subgraph Human[Human identity boundary]
+    Reviewer[Assigned reviewer]
+    Admin[Tenant connector administrator]
+    IdP[Customer workforce IdP]
+    Browser[Authenticated browser session]
+    Reviewer --> IdP --> Browser
+    Admin --> IdP
+  end
+  subgraph Service[AccessAtlas tenant-isolated service boundary]
+    API[API authorization: RBAC + ABAC]
+    DB[(Tenant A / Tenant B rows: forced RLS + composite keys)]
+    Queue[Snapshot queue]
+    Worker[Isolated connector worker]
+    Vault[Connector credential vault]
+    KMS[KMS envelope-key service]
+    Export[(Temporary encrypted evidence export)]
+    API --> DB
+    API --> Queue --> Worker
+    Worker --> Vault --> KMS
+    API --> Export
+  end
+  subgraph Provider[Customer-controlled provider boundary]
+    Graph[Microsoft Graph read-only APIs]
+    Okta[Okta read-only APIs]
+  end
+  Browser -->|tenant-scoped HTTPS session| API
+  Worker -->|authorized read-only TLS| Graph
+  Worker -->|authorized read-only TLS| Okta

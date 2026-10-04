@@ -1,0 +1,26 @@
+flowchart LR
+  subgraph C[Customer-controlled collection boundary]
+    S[Authorized sources] --> A[Customer collector / approved adapters]
+    A --> F[Lightweight forwarder\nfilter + minimize + local buffer]
+    F -->|health metadata by default| E[Outbound mTLS endpoint]
+    F -.->|events only when tenant opts in\nwith filter + redaction policy| O[Optional authorized event stream]
+    A --> QA[Local queue, back-pressure, replay, DLQ]
+  end
+  subgraph T[Tenant-isolated LogPulse service]
+    GW[API gateway / FastAPI] --> V[Validate + normalize]
+    V --> Q[Durable queue]
+    Q --> W[Workers]
+    W --> PG[(PostgreSQL\ntenant composite keys + forced RLS)]
+    W --> OB[Transactional outbox]
+    OB --> WH[Signed webhooks / notifications]
+    W -. opt-in only .-> OBJ[(Encrypted object store)]
+    PG --> UI[React + TypeScript dashboard]
+    IDP[OIDC IdP + MFA] --> GW
+    OT[OpenTelemetry] -. telemetry .-> OPS[Operations and alerting]
+  end
+  E --> GW
+  O --> GW
+  subgraph ADM[Separate service-admin plane]
+    PA[Privileged support console\njust-in-time, audited, restricted]
+  end
+  PA -. approved break-glass access .-> T

@@ -1,0 +1,21 @@
+flowchart TB
+  subgraph B1[Boundary 1 — customer environment]
+    SRC[Customer-authorized sources] --> COL[Collector / forwarder]
+    POL[Customer filtering and opt-in policy] --> COL
+    COL --> BUF[Encrypted local buffer\nquota, replay, DLQ]
+  end
+  subgraph B2[Boundary 2 — public transport]
+    BUF -->|outbound TLS; mTLS client identity\nmetadata-only default| ING[Ingress gateway]
+  end
+  subgraph B3[Boundary 3 — tenant data plane]
+    ING --> AUTH[Tenant authentication + authorization]
+    AUTH --> PROC[Schema validation / minimization]
+    PROC --> DB[(Tenant-partitioned PostgreSQL\nforced RLS + composite tenant keys)]
+    PROC --> QUEUE[Queue and worker isolation]
+    QUEUE -. explicit per-tenant opt-in .-> STORE[(Encrypted optional object store)]
+    DB --> APP[Tenant UI and API]
+  end
+  subgraph B4[Boundary 4 — privileged admin plane]
+    ADMIN[Service operators\nseparate identity, JIT approval] --> AUD[Immutable admin audit trail]
+  end
+  ADMIN -. no routine tenant data access .-> B3

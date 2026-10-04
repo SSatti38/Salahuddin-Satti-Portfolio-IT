@@ -1,0 +1,31 @@
+flowchart LR
+  subgraph UserZone[Reviewer devices — untrusted client]
+    Browser[React + TypeScript workspace]
+  end
+  subgraph AppZone[AccessAtlas application boundary]
+    Edge[WAF / TLS ingress]
+    API[FastAPI authorization and domain API]
+    DB[(PostgreSQL — tenant_id, forced RLS)]
+    Outbox[(Transactional outbox)]
+    Queue[[Snapshot job queue]]
+    Worker[Isolated connector worker]
+    KMS[KMS envelope key service]
+    Vault[Encrypted connector credential vault]
+    Obj[(Encrypted evidence export objects only)]
+    Obs[OpenTelemetry collector]
+  end
+  subgraph TenantTrust[Customer-controlled identity provider boundary]
+    IdP[Workforce OIDC / optional enterprise SAML]
+    Provider[Microsoft Graph and/or Okta read-only APIs]
+  end
+  Browser -->|HTTPS, OIDC session| Edge --> API
+  IdP -->|OIDC / SAML authentication| Edge
+  API --> DB
+  API --> Outbox --> Queue --> Worker
+  Worker -->|read-only TLS API calls| Provider
+  Worker --> Vault
+  Vault --> KMS
+  Worker --> DB
+  API --> Obj
+  API --> Obs
+  Worker --> Obs

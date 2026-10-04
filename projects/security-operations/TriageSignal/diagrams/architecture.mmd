@@ -1,0 +1,43 @@
+flowchart LR
+  subgraph TB1[Trust boundary: tenant identity and browser]
+    Analyst[Analyst / tenant admin]
+    UI[React + TypeScript workspace]
+    IdP[OIDC IdP / SAML federation]
+    Analyst --> UI
+    UI <-->|OIDC session; scoped API calls| IdP
+  end
+  subgraph TB2[Trust boundary: application control plane]
+    API[FastAPI API: authz, validation, provenance]
+    DB[(PostgreSQL: composite tenant keys + forced RLS)]
+    Outbox[Transactional outbox]
+    Q[Queue]
+    Worker[Isolated connector / normalization workers]
+    API --> DB
+    DB --> Outbox --> Q --> Worker
+    Worker --> DB
+  end
+  subgraph TB3[Trust boundary: tenant-authorized connector]
+    SIEM[SIEM alert API]
+    EDR[EDR alert API]
+    Cloud[Cloud / IdP alert APIs]
+  end
+  SIEM -->|read-only OAuth or signed webhook| Worker
+  EDR -->|read-only OAuth or signed webhook| Worker
+  Cloud -->|read-only OAuth or signed webhook| Worker
+  UI -->|TLS; tenant-scoped request| API
+  subgraph TB4[Trust boundary: isolated model policy gateway]
+    Gateway[Policy gateway: minimize, redact, schema-check]
+    Model[Approved model endpoint; no tools or network access]
+    Gateway -->|bounded prompt; evidence IDs| Model
+    Model -->|structured advisory only| Gateway
+  end
+  API -->|explicit analyst request; minimized context| Gateway
+  Gateway -->|validated draft + citations| API
+  subgraph TB5[Trust boundary: encrypted storage]
+    KMS[Managed KMS: envelope keys]
+    Objects[(S3-compatible encrypted artifacts; opt-in)]
+    DB -->|tenant-scoped data key| KMS
+    Worker -->|explicit artifact only| Objects
+    KMS -. key wrap / unwrap .-> Objects
+  end
+  API -. telemetry, no alert content .-> OTel[OpenTelemetry collector]
