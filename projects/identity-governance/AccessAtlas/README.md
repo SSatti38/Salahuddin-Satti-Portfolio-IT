@@ -22,9 +22,14 @@ The workspace would collect narrowly scoped, read-only snapshots, normalize a mi
 
 
 
-The design draws on identity and security guidance such as [NIST SP 800-63-4 Digital Identity Guidelines (final, July 2025)](https://pages.nist.gov/800-63-4/), [NIST SP 800-53 Rev. 5, Release 5.2.0](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final), and the [voluntary CISA Cybersecurity Performance Goals 2.0](https://www.cisa.gov/cybersecurity-performance-goals-2-0-cpg-2-0). These are design references, not attestations, certification, or a claim of compliance.
+The design draws on identity and security guidance such as [NIST SP 800-63-4 Digital Identity Guidelines (final, July 2025)](https://pages.nist.gov/800-63-4/), [NIST SP 800-53 Rev. 5, Release 5.2.0 (minor release; Aug. 27, 2025)](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final), and the [voluntary CISA Cybersecurity Performance Goals 2.0](https://www.cisa.gov/cybersecurity-performance-goals-2-0-cpg-2-0). These are design references, not attestations, certification, or a claim of compliance.
 
 
+### Package map
+
+**Diagrams:** [architecture and data flow](diagrams/architecture.mmd) · [trust boundaries](diagrams/trust-boundaries.mmd). **Prototype:** [static synthetic-data mockup](prototype/index.html).
+
+**Testing plan (proposed, not executed):** [evidence, backup, testing, and deployment](README.md#evidence-backup-testing-and-deployment). **Research context:** inline citations in [audience and value](README.md#audience-problem-and-value), [integrations](README.md#integrations-and-least-privilege), [tenant authorization](README.md#tenant-separation-schema-and-authorization), and [encryption/session controls](README.md#encryption-identity-and-session-controls).
 
 ## Assumptions and boundaries
 
@@ -206,7 +211,7 @@ flowchart TB
 
 
 
-Authentication for workforce users uses OIDC authorization code flow with PKCE; enterprise SAML 2.0 can be supported through a tenant-configured identity broker. The OIDC design follows [OpenID Connect Core](https://openid.net/specs/openid-connect-core-1_0.html). SAML support follows the [OASIS SAML 2.0 specification](https://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf). Provider retrieval uses Microsoft Graph read-only application/delegated permissions or Okta Users, Groups, and System Log read scopes, selected to match tenant use cases and approved by an administrator. The [Microsoft Graph permissions reference](https://learn.microsoft.com/graph/permissions-reference) and [Okta API scopes reference](https://developer.okta.com/docs/api/oauth2/) should be checked at connector design and approval time; product APIs and scopes evolve. For directory import, [SCIM 2.0 (RFC 7644)](https://www.rfc-editor.org/rfc/rfc7644) can be consumed as a read-only import interface where the provider permits it. No SCIM write operation is issued.
+Authentication for workforce users uses OIDC authorization code flow with PKCE; enterprise SAML 2.0 can be supported through a tenant-configured identity broker. The OIDC design follows [OpenID Connect Core 1.0 (incorporating errata set 2, 15 Dec 2023)](https://openid.net/specs/openid-connect-core-1_0.html). SAML support follows the [OASIS SAML 2.0 specification](https://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf). Provider retrieval uses Microsoft Graph read-only application/delegated permissions or Okta Users, Groups, and System Log read scopes, selected to match tenant use cases and approved by an administrator. The [Microsoft Graph permissions reference](https://learn.microsoft.com/graph/permissions-reference) and [Okta OAuth 2.0 Scopes (Okta documentation)](https://developer.okta.com/docs/api/oauth2/) should be checked at connector design and approval time; product APIs and scopes evolve. For directory import, [SCIM 2.0 (RFC 7644)](https://www.rfc-editor.org/rfc/rfc7644) can be consumed as a read-only import interface where the provider permits it. No SCIM write operation is issued.
 
 
 
@@ -226,7 +231,7 @@ API rate limits are honored with backoff and provider-specific concurrency caps.
 
 
 
-A tenant is the security boundary. Tenant context comes from a validated authenticated membership, never from a caller-supplied header alone. Each request opens a transaction and executes `SET LOCAL app.tenant_id = '<validated-id>'`; database policies use that value and deny access if absent. The application database role does not own tenant tables or have `BYPASSRLS`; policies are enabled and forced. Composite keys and relationships prevent cross-tenant joins even if a service query is defective. A simplified pattern is:
+A tenant is the security boundary. Tenant context comes from a validated authenticated membership, never from a caller-supplied header alone. After the server verifies membership, each request opens a transaction and sets the tenant context using a **bound SQL parameter**, for example `SELECT set_config('app.tenant_id', $1, true);`; the final `true` makes the setting transaction-local. Never interpolate a caller-provided tenant ID into SQL. Database policies deny access when context is absent or invalid. The application database role does not own tenant tables or have `BYPASSRLS`; policies are enabled and forced. Composite keys and relationships prevent cross-tenant joins even if a service query is defective. A simplified pattern is:
 
 
 
@@ -268,7 +273,7 @@ CREATE POLICY tenant_isolation ON review_decision
 
 
 
-Use separate database roles for migration, API, and worker; workers receive only the tenant-scoped access needed to store snapshots. Every object identifier in an API path is re-authorized against tenant and relationship. Role-based access control (RBAC) defines tenant admin, campaign manager, reviewer, application owner, and auditor capabilities. Attribute-based access control (ABAC) further limits reviewers to assigned campaigns and population, owners to their applications, and auditors to explicitly granted campaigns and expiry dates. Deny by default; check both object-level and function-level authorization as emphasized in the [OWASP API Security Top 10 2023](https://owasp.org/API-Security/editions/2023/en/0x11-t10/). Use [OWASP ASVS 5.0.0](https://owasp.org/www-project-application-security-verification-standard/) as a design and verification reference, not as a claim of validation.
+Use separate database roles for migration, API, and worker; workers receive only the tenant-scoped access needed to store snapshots. Every object identifier in an API path is re-authorized against tenant and relationship. Role-based access control (RBAC) defines tenant admin, campaign manager, reviewer, application owner, and auditor capabilities. Attribute-based access control (ABAC) further limits reviewers to assigned campaigns and population, owners to their applications, and auditors to explicitly granted campaigns and expiry dates. Deny by default; check both object-level and function-level authorization as emphasized in the [OWASP Top 10 API Security Risks – 2023](https://owasp.org/API-Security/editions/2023/en/0x11-t10/). Use [OWASP Application Security Verification Standard (ASVS) v5.0.0](https://owasp.org/www-project-application-security-verification-standard/) as a design and verification reference, not as a claim of validation.
 
 
 
@@ -374,7 +379,7 @@ Proposed recovery objectives are RPO 15 minutes and RTO 4 hours for the applicat
 
 
 
-Testing includes unit tests for rules and normalization; property tests for pagination and idempotency; integration tests against provider simulators; authorization tests for every endpoint and object relationship; database tests proving forced RLS and composite foreign-key isolation across tenants; webhook signature/replay tests; accessibility checks; dependency and secret scanning in CI; load tests at designed scale; and recovery drills. Security verification should be mapped to relevant OWASP ASVS 5.0.0 controls, with unresolved findings tracked; no test result is implied here.
+Testing includes unit tests for rules and normalization; property tests for pagination and idempotency; integration tests against provider simulators; authorization tests for every endpoint and object relationship; database tests proving forced RLS and composite foreign-key isolation across tenants; webhook signature/replay tests; accessibility checks; dependency and secret scanning in CI; load tests at designed scale; and recovery drills. Security verification should be mapped to relevant OWASP ASVS v5.0.0 controls, with unresolved findings tracked; no test result is implied here.
 
 
 

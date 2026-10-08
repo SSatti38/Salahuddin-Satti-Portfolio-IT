@@ -21,6 +21,11 @@ The intended audience is SOC analysts and security operations leads, particularl
 TriageSignal proposes one read-only workspace that groups an alert with time-bounded, source-attributed context; separates observed facts from generated interpretation; and offers a reviewable draft for a human to edit or reject. Its value proposition is faster, more consistent context gathering without replacing analyst judgment or changing the source systems. Any future evaluation of that proposition would require a separately approved pilot and measured, privacy-reviewed evidence; this concept makes no outcome claims.
 
 
+### Package map
+
+**Diagrams:** [service and data flow](diagrams/architecture.mmd) · [trust boundaries](diagrams/trust-boundaries.mmd). **Prototype:** [static synthetic-data mockup](prototype/index.html).
+
+**Testing plan (proposed, not executed):** [reliability, operations, and quality](README.md#reliability-operations-and-quality). **Research context:** inline citations in [advisory AI and human review](README.md#advisory-ai-and-human-review), [identity and authorization](README.md#identity-authorization-and-session-lifecycle), and [privacy and audit](README.md#privacy-retention-encryption-and-audit).
 
 ### Assumptions and boundaries
 
@@ -396,7 +401,7 @@ A future model call would occur only after an analyst explicitly requests a draf
 
 
 
-The interface visibly labels generated interpretation, shows source facts separately, and links each claim to a source record. Confidence language is not presented as calibrated probability. A human reviews and edits the draft; no case note is accepted until an explicit review/accept step, recorded with actor and timestamp. NIST's [AI 600-1 Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf) and [OWASP GenAI security guidance](https://genai.owasp.org/llm-top-10/) inform proposed risk controls; neither is represented as an endorsement or attestation.
+The interface visibly labels generated interpretation, shows source facts separately, and links each claim to a source record. Confidence language is not presented as calibrated probability. A human reviews and edits the draft; no case note is accepted until an explicit review/accept step, recorded with actor and timestamp. [NIST AI 600-1, Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile (July 2024)](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf) and [OWASP Top 10 for LLMs 2023-24](https://genai.owasp.org/llm-top-10/) inform proposed risk controls; neither is represented as an endorsement or attestation.
 
 
 
@@ -408,7 +413,7 @@ OIDC Authorization Code flow with PKCE is the preferred sign-in path; SAML 2.0 f
 
 
 
-RBAC grants analyst, lead, tenant administrator, and narrowly scoped support roles. ABAC conditions further restrict by tenant, case assignment, data classification, connector state, and action purpose. Support access is denied by default, requires tenant-approved time-bounded elevation and recorded reason, and is read-only. Separate duties for authorizing connectors, changing retention, and reviewing access. Enforce authorization at every API object and action boundary, not solely in the interface; these controls reflect risks highlighted by the [OWASP API Security Top 10 (2023)](https://owasp.org/API-Security/editions/2023/en/0x11-t10/).
+RBAC grants analyst, lead, tenant administrator, and narrowly scoped support roles. ABAC conditions further restrict by tenant, case assignment, data classification, connector state, and action purpose. Support access is denied by default, requires tenant-approved time-bounded elevation and recorded reason, and is read-only. Separate duties for authorizing connectors, changing retention, and reviewing access. Enforce authorization at every API object and action boundary, not solely in the interface; these controls reflect risks highlighted by the [OWASP Top 10 API Security Risks – 2023](https://owasp.org/API-Security/editions/2023/en/0x11-t10/).
 
 
 
@@ -424,7 +429,7 @@ Use TLS in transit and provider-managed encryption at rest, with managed KMS env
 
 
 
-Audit events are append-only from ordinary application roles and include tenant, actor, action, target type/opaque ID, authorization result, request/correlation ID, timestamp, and reason where relevant. Do not put evidence content or secrets in audit records. Tenant-visible audit export and retention configuration support accountability. The proposal is designed to support risk-management practices described by [NIST CSF 2.0](https://www.nist.gov/cyberframework), [NIST SP 800-61 Rev. 3](https://csrc.nist.gov/pubs/sp/800/61/r3/final) (final April 2025), and selected controls in [NIST SP 800-53 Rev. 5, Release 5.2.0](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final); it is not certified or compliant by virtue of this design. Verification could use [OWASP ASVS 5.0.0](https://owasp.org/www-project-application-security-verification-standard/) as a test-planning reference, not an attestation.
+Audit events are append-only from ordinary application roles and include tenant, actor, action, target type/opaque ID, authorization result, request/correlation ID, timestamp, and reason where relevant. Do not put evidence content or secrets in audit records. Tenant-visible audit export and retention configuration support accountability. The proposal is designed to support risk-management practices described by [NIST Cybersecurity Framework (CSF) 2.0](https://www.nist.gov/cyberframework), [NIST SP 800-61 Rev. 3](https://csrc.nist.gov/pubs/sp/800/61/r3/final) (final April 2025), and selected controls in [NIST SP 800-53 Rev. 5, Release 5.2.0 (minor release; Aug. 27, 2025)](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final); it is not certified or compliant by virtue of this design. Verification could use [OWASP Application Security Verification Standard (ASVS) v5.0.0](https://owasp.org/www-project-application-security-verification-standard/) as a test-planning reference, not an attestation.
 
 
 

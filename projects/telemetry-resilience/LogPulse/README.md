@@ -24,9 +24,14 @@ The value proposition is operational coordination rather than automated security
 
 
 
-Design choices are informed by CISA’s [Logging Reference Architecture (LRA)](https://www.cisa.gov/sites/default/files/2026-09/logging-reference-architecture-508.pdf), published in August 2026. The LRA discusses risk-based, source-appropriate collection; durable transport and buffering; normalization, validation, and protection; operational search; lower-cost retrievable retention; and controlled policy boundaries. It is a design reference, not an attestation or a claim that this proposal satisfies an agency requirement. The [CISA event logging and threat detection best practices](https://www.cisa.gov/resources-tools/resources/best-practices-event-logging-and-threat-detection) likewise inform the emphasis on usable, source-appropriate event visibility.
+Design choices are informed by CISA’s [Logging Reference Architecture (LRA)](https://www.cisa.gov/sites/default/files/2026-09/logging-reference-architecture-508.pdf), published in August 2026. The LRA discusses risk-based, source-appropriate collection; durable transport and buffering; normalization, validation, and protection; operational search; lower-cost retrievable retention; and controlled policy boundaries. It is a design reference, not an attestation or a claim that this proposal satisfies an agency requirement. The [CISA Best Practices for Event Logging and Threat Detection](https://www.cisa.gov/resources-tools/resources/best-practices-event-logging-and-threat-detection) likewise inform the emphasis on usable, source-appropriate event visibility.
 
 
+### Package map
+
+**Diagrams:** [source-to-health architecture](diagrams/architecture.mmd) · [trust boundaries](diagrams/trust-boundaries.mmd). **Prototype:** [static synthetic-data mockup](prototype/index.html).
+
+**Testing plan (proposed, not executed):** [testing, deployment, and roadmap](README.md#testing-deployment-and-roadmap). **Research context:** inline citations in [design rationale](README.md#who-it-is-for-and-what-it-solves), [architecture and taxonomy](README.md#proposed-architecture-and-data-flow), and [security and privacy](README.md#security-tenancy-identity-and-privacy).
 
 ## Assumptions, boundaries, and personas
 
@@ -204,7 +209,7 @@ Every business row carries a `tenant_id`; relational keys and foreign keys inclu
 
 
 
-RBAC roles are Tenant Owner, Administrator, Analyst, Source Owner, Read-only Auditor, and Service Operator. ABAC conditions constrain actions by tenant, source ownership, environment, data classification, opt-in status, and approved purpose. Analysts can view health and mapping but cannot manage credentials; source owners see assigned sources; auditors receive read-only reports; and service operators have no default access to tenant event contents. Field-level authorization prevents sensitive optional payload properties from appearing in health APIs. These controls are designed to address common API risks such as object-level authorization, broken function-level authorization, resource exhaustion, and SSRF described in the [OWASP API Security Top 10 (2023)](https://owasp.org/API-Security/editions/2023/en/0x11-t10/).
+RBAC roles are Tenant Owner, Administrator, Analyst, Source Owner, Read-only Auditor, and Service Operator. ABAC conditions constrain actions by tenant, source ownership, environment, data classification, opt-in status, and approved purpose. Analysts can view health and mapping but cannot manage credentials; source owners see assigned sources; auditors receive read-only reports; and service operators have no default access to tenant event contents. Field-level authorization prevents sensitive optional payload properties from appearing in health APIs. These controls are designed to address common API risks such as object-level authorization, broken function-level authorization, resource exhaustion, and SSRF described in the [OWASP Top 10 API Security Risks – 2023](https://owasp.org/API-Security/editions/2023/en/0x11-t10/).
 
 
 
@@ -216,7 +221,7 @@ TLS 1.2+ is the transport baseline (prefer TLS 1.3 where supported). PostgreSQL 
 
 
 
-Audit events record actor/service identity, tenant, action, target ID, outcome, timestamp, correlation ID, and policy version, but avoid raw payloads and secrets. The audit trail is append-only to the application, access-controlled, integrity-monitored, and retained on a separate schedule. Privacy notices explain metadata, optional content, processors, location, retention, deletion behavior, and support access. NIST [CSF 2.0](https://www.nist.gov/cyberframework) and [SP 800-61 Rev. 3](https://csrc.nist.gov/pubs/sp/800/61/r3/final) (final, April 2025) inform the risk-management and incident-response context for health evidence; neither is presented as a certification. CISA [CPG 2.0](https://www.cisa.gov/cybersecurity-performance-goals-2-0-cpg-2-0) is explicitly voluntary and informs prioritization only.
+Audit events record actor/service identity, tenant, action, target ID, outcome, timestamp, correlation ID, and policy version, but avoid raw payloads and secrets. The audit trail is append-only to the application, access-controlled, integrity-monitored, and retained on a separate schedule. Privacy notices explain metadata, optional content, processors, location, retention, deletion behavior, and support access. [NIST Cybersecurity Framework (CSF) 2.0](https://www.nist.gov/cyberframework) and [SP 800-61 Rev. 3](https://csrc.nist.gov/pubs/sp/800/61/r3/final) (final, April 2025) inform the risk-management and incident-response context for health evidence; neither is presented as a certification. CISA [CPG 2.0](https://www.cisa.gov/cybersecurity-performance-goals-2-0-cpg-2-0) is explicitly voluntary and informs prioritization only.
 
 
 
