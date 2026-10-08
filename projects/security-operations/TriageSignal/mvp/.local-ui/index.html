@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Local, single-user synthetic-data TriageSignal MVP.">
+  <title>TriageSignal · Local MVP</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="topbar"><div class="shell topbar-inner"><div class="brand"><span class="brand-mark" aria-hidden="true">TS</span><span>TriageSignal<small>Evidence-first alert review</small></span></div><span class="local-pill">LOCAL · SINGLE USER</span></div></header>
+<main id="main" class="shell">
+  <section class="hero" aria-labelledby="page-title"><div><div class="eyebrow">Security operations · sandbox</div><h1 id="page-title">TriageSignal</h1><p class="lede">A local alert review queue for fictional records. Inspect source references, record analyst notes, and move items through a human-reviewed workflow—without AI, integrations, or response actions.</p></div><aside class="hero-note"><strong>Evidence before interpretation.</strong><br>Every sample is fictional. This app does not contact SIEM, EDR, identity, model, or other network services.</aside></section>
+  <div class="notice" role="note"><strong>Local-only sandbox.</strong> Never import production, confidential SOC, or personal data pending security review. Data is stored as plaintext in a local SQLite file; there is no login or tenant isolation.</div>
+  <section class="toolbar" aria-label="Workspace actions"><div class="actions"><button class="btn btn-primary" id="load-demo" type="button">Load fictional sample</button><button class="btn" id="reset-demo" type="button">Reset to sample</button></div><p id="status" class="status-line" role="status" aria-live="polite">Starting local workspace…</p></section>
+  <section id="metrics" class="metrics" aria-label="Queue summary" aria-live="polite"></section>
+  <section class="workspace" aria-label="Alert review workspace">
+    <aside class="panel" aria-labelledby="tools-title"><div class="panel-head"><div><h2 id="tools-title">Bring in fictional records</h2><p>JSON or CSV · strict fields · max 512 KiB</p></div><span class="chip">LOCAL FILE</span></div><div class="panel-body">
+      <div class="field"><label for="import-file">Synthetic alert file</label><input class="file-control" id="import-file" type="file" accept=".json,.csv,application/json,text/csv"><span class="field-hint">Selected file is read in this browser and posted only to this loopback app.</span></div><button id="import-file-button" class="btn btn-primary btn-small" type="button">Validate &amp; import</button>
+      <div class="divider"></div><p class="subtle">Import records one time. Duplicate IDs are rejected; no imported text is treated as markup or executable content.</p>
+      <div class="divider"></div><div class="panel-head panel-head--plain"><div><h3>Recent local audit</h3><p>Review and import events</p></div></div><div id="audit" class="audit-list" aria-live="polite"></div>
+    </div></aside>
+    <div class="stack"><section class="panel" aria-labelledby="queue-title"><div class="panel-head"><div><h2 id="queue-title">Alert queue</h2><p>Choose an alert to inspect provenance and update review status.</p></div><span id="record-count" class="count-pill">0 records</span></div><div id="records" class="record-list" aria-live="polite"><div class="empty"><span class="empty-icon" aria-hidden="true">◌</span><strong>Loading local queue</strong>Sample data will appear only after you choose to load it.</div></div></section>
+      <section id="detail-panel" class="panel detail" aria-labelledby="detail-title"><div class="panel-head"><div><h2 id="detail-title">Alert detail</h2><p>Source facts and a human-authored review note.</p></div></div><div id="detail" class="detail-content"><div class="empty"><strong>No alert selected</strong>Load fictional data or import a synthetic JSON/CSV file to begin.</div></div></section>
+    </div>
+  </section>
+  <footer class="footer">MVP maturity: local single-workstation demonstration only, not deployed SaaS or production-ready. No AI calls, incident response, external network access, account actions, authentication, or tenant isolation. See the accompanying README and SECURITY.md for limits and data-wipe instructions.</footer>
+</main>
+</body>
+</html>

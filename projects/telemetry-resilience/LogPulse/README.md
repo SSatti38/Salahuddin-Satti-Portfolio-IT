@@ -334,3 +334,8 @@ Open `prototype/index.html` directly in a modern browser; no install, server, ex
 
 
 The linked CISA, NIST, OWASP, and MITRE material is used as **design reference** for specific concepts described above, not as approval, implementation evidence, compliance evidence, or attestation. In particular, the MITRE ATT&CK data-source page is retained as a versioned defensive-visibility taxonomy reference and explicitly not an effectiveness measure.
+
+
+## Local synthetic-data MVP (added 2026-10-08)
+
+This project now has a separate, runnable local MVP under [`mvp/`](mvp/). Start with the [MVP run guide](mvp/README.md); implementation is in [`mvp/core.py`](mvp/core.py) and [`mvp/domain.py`](mvp/domain.py). It uses only fictional or manually entered health metadata in local plaintext SQLite on one workstation, with no login or tenant isolation. It is **not deployed SaaS** and does not ingest production logs, scan, execute detections, or take response actions. The design proposal above and existing static prototype remain separate artifacts.

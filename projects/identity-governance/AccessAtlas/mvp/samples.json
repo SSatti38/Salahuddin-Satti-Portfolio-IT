@@ -1,0 +1,5 @@
+[
+  {"id":"identity-demo-017","display_name":"Mira Solis (fictional)","account_state":"active","last_sign_in":"2026-10-05T09:30:00Z","entitlement":"Demo-Reader","source":"Synthetic directory snapshot","snapshot_at":"2026-10-08T02:20:00Z","evidence":"Fictional sample identity and entitlement; no real person, directory, or account is represented."},
+  {"id":"identity-demo-022","display_name":"Evan Reed (fictional)","account_state":"active","last_sign_in":"2026-07-01T10:00:00Z","entitlement":"Demo-Privileged-Review","source":"Synthetic directory snapshot","snapshot_at":"2026-10-08T02:20:00Z","evidence":"Fictional older sign-in timestamp for reviewer workflow testing; it is not an access-risk verdict."},
+  {"id":"identity-demo-031","display_name":"Noor Vale (fictional)","account_state":"pending","last_sign_in":"","entitlement":"Demo-Onboarding-Group","source":"Synthetic directory snapshot","snapshot_at":"2026-10-08T02:20:00Z","evidence":"Fictional pending account state requiring human context; no provider-side change is available."}
+]

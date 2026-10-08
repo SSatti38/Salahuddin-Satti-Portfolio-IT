@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Local, single-user synthetic-data LogPulse MVP.">
+  <title>LogPulse · Local MVP</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="topbar"><div class="shell topbar-inner"><div class="brand"><span class="brand-mark" aria-hidden="true">LP</span><span>LogPulse<small>Telemetry source health</small></span></div><span class="local-pill">LOCAL · SINGLE USER</span></div></header>
+<main id="main" class="shell">
+  <section class="hero" aria-labelledby="page-title"><div><div class="eyebrow">Telemetry resilience · sandbox</div><h1 id="page-title">LogPulse</h1><p class="lede">A local health dashboard for fictional or manually entered source metadata. Review freshness, parser outcomes, backlog, thresholds, and a visibility mapping reference—without ingesting logs or probing systems.</p></div><aside class="hero-note"><strong>Metadata, not telemetry.</strong><br>Only the health fields you type or import are stored; this app does not connect to log sources.</aside></section>
+  <div class="notice" role="note"><strong>Local-only sandbox.</strong> Never enter production SOC, confidential, or personal data pending security review. Data is stored as plaintext in a local SQLite file; there is no login or tenant isolation.</div>
+  <section class="toolbar" aria-label="Workspace actions"><div class="actions"><button class="btn btn-primary" id="load-demo" type="button">Load fictional sample</button><button class="btn" id="reset-demo" type="button">Reset to sample</button></div><p id="status" class="status-line" role="status" aria-live="polite">Starting local workspace…</p></section>
+  <section id="metrics" class="metrics" aria-label="Source health summary" aria-live="polite"></section>
+  <section class="workspace" aria-label="Telemetry health workspace">
+    <aside class="panel" aria-labelledby="tools-title"><div class="panel-head"><div><h2 id="tools-title">Add health metadata</h2><p>Manual source input; no log records</p></div><span class="chip">NO CONNECTORS</span></div><div class="panel-body">
+      <form id="source-form" class="inline-form" autocomplete="off">
+        <div class="field"><label for="source-id">Source reference</label><input id="source-id" name="id" maxlength="80" placeholder="src-demo-edge" required><span class="field-hint">Opaque fictional identifier; letters, digits, dot, colon, dash, underscore.</span></div>
+        <div class="field"><label for="source-name">Display name</label><input id="source-name" name="name" maxlength="120" placeholder="Edge gateway sample" required></div>
+        <div class="field-row"><div class="field"><label for="owner">Owner label</label><input id="owner" name="owner" maxlength="100" placeholder="Platform team" required></div><div class="field"><label for="environment">Environment</label><select id="environment" name="environment"><option>Development</option><option>Test</option><option>Demo</option></select></div></div>
+        <div class="field-row"><div class="field"><label for="expected-minutes">Expected interval (min)</label><input id="expected-minutes" name="expected_minutes" type="number" min="1" max="10080" value="15" required></div><div class="field"><label for="backlog-threshold">Backlog threshold</label><input id="backlog-threshold" name="backlog_threshold" type="number" min="0" max="10000000" value="100" required></div></div>
+        <div class="field"><label for="last-seen">Last-seen timestamp (UTC)</label><input id="last-seen" name="last_seen_at" maxlength="40" placeholder="2026-10-08T05:45:00Z" required><span class="field-hint">Use ISO 8601 with UTC Z or an explicit offset.</span></div>
+        <div class="field-row"><div class="field"><label for="parser-status">Parser state</label><select id="parser-status" name="parser_status"><option value="healthy">Healthy</option><option value="degraded">Degraded</option><option value="failed">Failed</option></select></div><div class="field"><label for="accepted">Accepted count</label><input id="accepted" name="accepted_count" type="number" min="0" max="10000000" value="1200" required></div></div>
+        <div class="field-row"><div class="field"><label for="rejected">Rejected count</label><input id="rejected" name="rejected_count" type="number" min="0" max="10000000" value="0" required></div><div class="field"><label for="backlog">Backlog count</label><input id="backlog" name="backlog_count" type="number" min="0" max="10000000" value="4" required></div></div>
+        <div class="field"><label for="heartbeat">Heartbeat timestamp (UTC)</label><input id="heartbeat" name="heartbeat_at" maxlength="40" placeholder="2026-10-08T05:45:00Z" required></div>
+        <div class="field"><label for="coverage-ref">Mapping reference</label><input id="coverage-ref" name="coverage_ref" maxlength="120" placeholder="VIS-TELEMETRY-01" required></div>
+        <div class="field"><label for="coverage-notes">Mapping evidence / threshold rationale</label><textarea id="coverage-notes" name="coverage_notes" maxlength="1200" placeholder="Fictional mapping note: source may support the stated visibility use case; not proof of detection effectiveness." required></textarea></div>
+        <button class="btn btn-primary" type="submit">Save local metadata</button>
+      </form>
+      <div class="divider"></div><div class="field"><label for="import-file">Optional synthetic JSON/CSV</label><input class="file-control" id="import-file" type="file" accept=".json,.csv,application/json,text/csv"><span class="field-hint">Max 512 KiB; same allowlisted schema.</span></div><button id="import-file-button" class="btn btn-small" type="button">Validate &amp; import</button>
+      <div class="divider"></div><div class="panel-head panel-head--plain"><div><h3>Local audit</h3><p>Manual-entry and import events</p></div></div><div id="audit" class="audit-list" aria-live="polite"></div>
+    </div></aside>
+    <div class="stack"><section class="panel" aria-labelledby="queue-title"><div class="panel-head"><div><h2 id="queue-title">Source health</h2><p>Derived state is explainable and uses stated cadence and backlog thresholds.</p></div><span id="record-count" class="count-pill">0 sources</span></div><div id="records" class="record-list" aria-live="polite"><div class="empty"><span class="empty-icon" aria-hidden="true">◌</span><strong>Loading source health</strong>Health appears only after you add metadata or load the fictional sample.</div></div></section>
+      <section class="panel detail" aria-labelledby="detail-title"><div class="panel-head"><div><h2 id="detail-title">Health evidence &amp; mapping</h2><p>Freshness, parser, backlog, and mapping context.</p></div></div><div id="detail" class="detail-content"><div class="empty"><strong>No source selected</strong>Load fictional data or add local metadata to begin.</div></div></section>
+    </div>
+  </section>
+  <footer class="footer">MVP maturity: local single-workstation demonstration only, not deployed SaaS or production-ready. No log ingestion, source discovery, detection execution, scanning, network probes, response actions, external integration, authentication, or tenant isolation. See README.md and SECURITY.md for limitations and wipe instructions.</footer>
+</main>
+</body>
+</html>

@@ -504,3 +504,8 @@ The prototype at [`prototype/index.html`](prototype/index.html) is a standalone 
 
 
 A responsible sequence would be: validate analyst workflow with synthetic scenarios; review data fields, connector scope, retention, threat model, and tenant boundaries with stakeholders; build and test an isolated read-only connector in a non-production environment; evaluate a policy gateway using mocked model responses and adversarial fixtures; conduct privacy/security review and recovery exercises; then consider a separately approved limited pilot. Each stage is conditional, and none has been performed by this concept.
+
+
+## Local synthetic-data MVP (added 2026-10-08)
+
+This project now has a separate, runnable local MVP under [`mvp/`](mvp/). Start with the [MVP run guide](mvp/README.md); implementation is in [`mvp/core.py`](mvp/core.py) and [`mvp/domain.py`](mvp/domain.py). It is a single-workstation synthetic-data sandbox using local plaintext SQLite, with no login or tenant isolation. It is **not deployed SaaS** and does not make AI calls, connect to alert sources, or perform incident response. The design proposal above and existing static prototype remain available as separate artifacts.

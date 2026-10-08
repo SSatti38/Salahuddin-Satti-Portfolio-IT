@@ -1,0 +1,33 @@
+[
+  {
+    "id": "alert-demo-1042",
+    "source": "Synthetic SIEM fixture",
+    "severity": "medium",
+    "occurred_at": "2026-10-08T02:15:00Z",
+    "summary": "Fictional sign-in anomaly marker for interface testing; not a real account or event.",
+    "evidence": [
+      {"id": "evidence-demo-01", "source": "Synthetic identity fixture", "observed_at": "2026-10-08T02:13:00Z", "summary": "Pseudonymous sample location differs from this fixture's fictional baseline."},
+      {"id": "evidence-demo-02", "source": "Synthetic SIEM fixture", "observed_at": "2026-10-08T02:15:00Z", "summary": "Alert summary is invented solely to demonstrate provenance links."}
+    ]
+  },
+  {
+    "id": "alert-demo-1078",
+    "source": "Synthetic endpoint fixture",
+    "severity": "low",
+    "occurred_at": "2026-10-08T02:02:00Z",
+    "summary": "Fictional endpoint health event with a linked evidence reference for human review.",
+    "evidence": [
+      {"id": "evidence-demo-03", "source": "Synthetic endpoint fixture", "observed_at": "2026-10-08T02:02:00Z", "summary": "No production endpoint or device is represented."}
+    ]
+  },
+  {
+    "id": "alert-demo-1113",
+    "source": "Synthetic cloud fixture",
+    "severity": "high",
+    "occurred_at": "2026-10-08T01:48:00Z",
+    "summary": "Fictional cloud audit signal; severity is illustrative and not a risk score.",
+    "evidence": [
+      {"id": "evidence-demo-04", "source": "Synthetic cloud fixture", "observed_at": "2026-10-08T01:48:00Z", "summary": "Demonstration evidence only. Validate any real event in its authorized source of record."}
+    ]
+  }
+]

@@ -412,3 +412,8 @@ Illustrative SaaS pricing for discussion only: **Team** at $299/month for one te
 
 
 Open `prototype/index.html` directly in a modern browser or serve the repository locally, for example `python3 -m http.server 8000` from the repository root, then visit `/projects/identity-governance/AccessAtlas/prototype/`. The prototype is a single static HTML file with inline CSS, SVG, and vanilla JavaScript: no backend, network calls, external libraries, authentication, or live provider integration. Search, filters, and decision controls work only in the current page's memory and reset on reload. Its sample data is synthetic. The mockup displays **STATIC INTERACTIVE MOCKUP • SYNTHETIC DATA ONLY** and **DESIGN PROPOSAL — NOT IMPLEMENTED**; nothing in it changes account access.
+
+
+## Local synthetic-data MVP (added 2026-10-08)
+
+This project now has a separate, runnable local MVP under [`mvp/`](mvp/). See the [MVP run guide](mvp/README.md), [`mvp/core.py`](mvp/core.py), and [`mvp/domain.py`](mvp/domain.py). The implementation uses only synthetic identity snapshots and local plaintext SQLite on one workstation; it has no login or tenant isolation. It is **not deployed SaaS** and has no provider connector, account provisioning, revocation, or write-back. The design proposal above and original static prototype remain separate and intact.

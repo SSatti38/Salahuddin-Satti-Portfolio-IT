@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Local, single-user synthetic-data AccessAtlas MVP.">
+  <title>AccessAtlas · Local MVP</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="topbar"><div class="shell topbar-inner"><div class="brand"><span class="brand-mark" aria-hidden="true">AA</span><span>AccessAtlas<small>Human-led access review</small></span></div><span class="local-pill">LOCAL · SINGLE USER</span></div></header>
+<main id="main" class="shell">
+  <section class="hero" aria-labelledby="page-title"><div><div class="eyebrow">Identity governance · sandbox</div><h1 id="page-title">AccessAtlas</h1><p class="lede">A local review queue for fictional identity snapshots. Inspect entitlement evidence and record a reviewer decision with rationale; follow-up is only a local note and never changes an account.</p></div><aside class="hero-note"><strong>Human decisions only.</strong><br>No provider connector, OAuth, provisioning, revocation, account changes, or external network requests.</aside></section>
+  <div class="notice" role="note"><strong>Local-only sandbox.</strong> Never import production, confidential HR, identity, or personal data pending security review. Data is stored as plaintext in a local SQLite file; there is no login or tenant isolation.</div>
+  <section class="toolbar" aria-label="Workspace actions"><div class="actions"><button class="btn btn-primary" id="load-demo" type="button">Load fictional sample</button><button class="btn" id="reset-demo" type="button">Reset to sample</button></div><p id="status" class="status-line" role="status" aria-live="polite">Starting local workspace…</p></section>
+  <section id="metrics" class="metrics" aria-label="Review summary" aria-live="polite"></section>
+  <section class="workspace" aria-label="Access review workspace">
+    <aside class="panel" aria-labelledby="tools-title"><div class="panel-head"><div><h2 id="tools-title">Import a snapshot</h2><p>JSON or CSV · strict fields · max 512 KiB</p></div><span class="chip">SYNTHETIC ONLY</span></div><div class="panel-body">
+      <div class="field"><label for="import-file">Fictional identity snapshot</label><input class="file-control" id="import-file" type="file" accept=".json,.csv,application/json,text/csv"><span class="field-hint">Allowlisted snapshot fields only; duplicate identity references are rejected.</span></div><button id="import-file-button" class="btn btn-primary btn-small" type="button">Validate &amp; import</button>
+      <div class="divider"></div><p class="subtle">The app records review choices and rationale locally. A reviewer cannot create, disable, provision, or revoke any account.</p>
+      <div class="divider"></div><div class="panel-head panel-head--plain"><div><h3>Decision audit</h3><p>Recent import and review events</p></div></div><div id="audit" class="audit-list" aria-live="polite"></div>
+    </div></aside>
+    <div class="stack"><section class="panel" aria-labelledby="queue-title"><div class="panel-head"><div><h2 id="queue-title">Review queue</h2><p>Signals are contextual prompts, not findings of misuse.</p></div><span id="record-count" class="count-pill">0 identities</span></div><div id="records" class="record-list" aria-live="polite"><div class="empty"><span class="empty-icon" aria-hidden="true">◌</span><strong>Loading local snapshot</strong>Nothing is imported until you choose a file or load the fictional sample.</div></div></section>
+      <section class="panel detail" aria-labelledby="detail-title"><div class="panel-head"><div><h2 id="detail-title">Identity evidence</h2><p>Inspect source snapshot, entitlement, and reviewer history.</p></div></div><div id="detail" class="detail-content"><div class="empty"><strong>No identity selected</strong>Load fictional data or import a synthetic JSON/CSV snapshot to begin.</div></div></section>
+    </div>
+  </section>
+  <footer class="footer">MVP maturity: local single-workstation demonstration only, not deployed SaaS or production-ready. No authentication, tenant isolation, provider integration, account provisioning/revocation, or write-back. See README.md and SECURITY.md for limits and wipe instructions.</footer>
+</main>
+</body>
+</html>
